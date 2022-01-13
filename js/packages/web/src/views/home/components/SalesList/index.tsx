@@ -31,7 +31,7 @@ export const SalesListView = () => {
     <>
       <Banner
         src="/main-banner.svg"
-        headingText="The wonderful Artwork of Hinotumaso "
+        headingText="Wonderful Artwork"
         subHeadingText="Buy exclusive Hinotumaso NFTs."
         actionComponent={<HowToBuyModal buttonClassName="secondary-btn" />}
         useBannerBg
