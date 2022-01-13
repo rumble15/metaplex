@@ -31,8 +31,8 @@ export const SalesListView = () => {
     <>
       <Banner
         src="/main-banner.svg"
-        headingText="The amazing world of Metaplex."
-        subHeadingText="Buy exclusive Metaplex NFTs."
+        headingText="The wonderful Artwork of Hinotumaso "
+        subHeadingText="Buy exclusive Hinotumaso NFTs."
         actionComponent={<HowToBuyModal buttonClassName="secondary-btn" />}
         useBannerBg
       />
@@ -47,7 +47,7 @@ export const SalesListView = () => {
                 <TabPane
                   tab={
                     <>
-                      <span className="live"></span> Live
+                      <span className="live"></span> Buy now!
                     </>
                   }
                   key={LiveAuctionViewState.All}
