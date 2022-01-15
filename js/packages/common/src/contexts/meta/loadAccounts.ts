@@ -11,8 +11,8 @@ import {
   getEdition,
   Metadata,
   MAX_CREATOR_LEN,
-  MAX_NAME_LENGTH,
   MAX_CREATOR_LIMIT,
+  MAX_NAME_LENGTH,
   MAX_SYMBOL_LENGTH,
   MAX_URI_LENGTH,
   decodeMetadata,
@@ -59,7 +59,7 @@ import { processPackCards } from './processPackCards';
 import { getProvingProcessByPackSetAndWallet } from '../../models/packs/accounts/ProvingProcess';
 import { processProvingProcess } from './processProvingProcess';
 
-const MULTIPLE_ACCOUNT_BATCH_SIZE = 10;
+const MULTIPLE_ACCOUNT_BATCH_SIZE = 100;
 
 export const USE_SPEED_RUN = false;
 const WHITELISTED_METADATA = ['98vYFjBYS9TguUMWQRPjy2SZuxKuUMcqR4vnQiLjZbte'];
