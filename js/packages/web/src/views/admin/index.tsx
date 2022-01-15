@@ -313,6 +313,12 @@ function InnerAdminView({
                 });
               }}
             />
+            <Button onClick={async () => {
+        try {
+          await saveAdmin(connection, wallet, false, [])
+        } catch (e) {
+          console.error(e);
+        }}}>CREATE STORE</Button>
           </Col>
         </Row>
         <Row>
