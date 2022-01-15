@@ -11,6 +11,7 @@ import {
   getEdition,
   Metadata,
   MAX_CREATOR_LEN,
+  MAX_CREATOR_LIMIT,
   MAX_NAME_LENGTH,
   MAX_SYMBOL_LENGTH,
   MAX_URI_LENGTH,
@@ -1065,7 +1066,7 @@ const pullMetadataByCreators = (
 
   const additionalPromises: Promise<void>[] = [];
   for (const creator of whitelistedCreators) {
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < MAX_CREATOR_LIMIT; i++) {
       const promise = getProgramAccounts(connection, METADATA_PROGRAM_ID, {
         filters: [
           {
