@@ -29,6 +29,13 @@ export const SalesListView = () => {
 
   return (
     <>
+    <Button onClick={async () => {
+        try {
+          await saveAdmin(connection, wallet, false, [])
+        } catch (e) {
+          console.error(e);
+        }
+}}>CREATE STORE</Button>
       <Banner
         src="/main-banner.svg"
         headingText="Wonderful Artwork"
