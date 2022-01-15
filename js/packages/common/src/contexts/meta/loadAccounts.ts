@@ -59,7 +59,7 @@ import { processPackCards } from './processPackCards';
 import { getProvingProcessByPackSetAndWallet } from '../../models/packs/accounts/ProvingProcess';
 import { processProvingProcess } from './processProvingProcess';
 
-const MULTIPLE_ACCOUNT_BATCH_SIZE = 100;
+const MULTIPLE_ACCOUNT_BATCH_SIZE = 2;
 
 export const USE_SPEED_RUN = false;
 const WHITELISTED_METADATA = ['98vYFjBYS9TguUMWQRPjy2SZuxKuUMcqR4vnQiLjZbte'];
@@ -1028,7 +1028,7 @@ const pullEditions = async (
 
     setOf100MetadataEditionKeys.push(editionKey);
 
-    if (setOf100MetadataEditionKeys.length >= 100) {
+    if (setOf100MetadataEditionKeys.length >= 3) {
       loadBatch();
     }
   }
@@ -1125,7 +1125,7 @@ export const pullMetadataByKeys = async (
   for (const metadata of metadataKeys) {
     setOf100MetadataEditionKeys.push(metadata);
 
-    if (setOf100MetadataEditionKeys.length >= 100) {
+    if (setOf100MetadataEditionKeys.length >= 3) {
       loadBatch();
     }
   }
