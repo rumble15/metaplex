@@ -1065,7 +1065,7 @@ const pullMetadataByCreators = (
 
   const additionalPromises: Promise<void>[] = [];
   for (const creator of whitelistedCreators) {
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
       const promise = getProgramAccounts(connection, METADATA_PROGRAM_ID, {
         filters: [
           {
