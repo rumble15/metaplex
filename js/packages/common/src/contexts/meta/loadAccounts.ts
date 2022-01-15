@@ -11,7 +11,6 @@ import {
   getEdition,
   Metadata,
   MAX_CREATOR_LEN,
-  MAX_CREATOR_LIMIT,
   MAX_NAME_LENGTH,
   MAX_SYMBOL_LENGTH,
   MAX_URI_LENGTH,
@@ -1028,7 +1027,7 @@ const pullEditions = async (
 
     setOf100MetadataEditionKeys.push(editionKey);
 
-    if (setOf100MetadataEditionKeys.length >= 100) {
+    if (setOf100MetadataEditionKeys.length >= 10) {
       loadBatch();
     }
   }
@@ -1066,7 +1065,7 @@ const pullMetadataByCreators = (
 
   const additionalPromises: Promise<void>[] = [];
   for (const creator of whitelistedCreators) {
-    for (let i = 0; i < MAX_CREATOR_LIMIT; i++) {
+    for (let i = 0; i < 2; i++) {
       const promise = getProgramAccounts(connection, METADATA_PROGRAM_ID, {
         filters: [
           {
@@ -1125,7 +1124,7 @@ export const pullMetadataByKeys = async (
   for (const metadata of metadataKeys) {
     setOf100MetadataEditionKeys.push(metadata);
 
-    if (setOf100MetadataEditionKeys.length >= 100) {
+    if (setOf100MetadataEditionKeys.length >= 10) {
       loadBatch();
     }
   }
