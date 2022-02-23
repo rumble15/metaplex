@@ -66,12 +66,14 @@ export const ArtCreateView = () => {
   const [step, setStep] = useState<number>(0);
   const [stepsVisible, setStepsVisible] = useState<boolean>(true);
   const [isMinting, setMinting] = useState<boolean>(false);
-  const [nft, setNft] =
-    useState<{ metadataAccount: StringPublicKey } | undefined>(undefined);
+  const [nft, setNft] = useState<
+    { metadataAccount: StringPublicKey } | undefined
+  >(undefined);
   const [files, setFiles] = useState<File[]>([]);
   const [attributes, setAttributes] = useState<IMetadataExtension>({
     name: '',
     symbol: '',
+    collection: '',
     description: '',
     external_url: '',
     image: '',
@@ -104,6 +106,7 @@ export const ArtCreateView = () => {
       name: attributes.name,
       symbol: attributes.symbol,
       creators: attributes.creators,
+      collection: attributes.collection,
       description: attributes.description,
       sellerFeeBasisPoints: attributes.seller_fee_basis_points,
       image: attributes.image,
@@ -242,7 +245,11 @@ const CategoryStep = (props: {
         <h2>Create a new item</h2>
         <p>
           First time creating on Metaplex?{' '}
-          <a href="https://docs.metaplex.com/storefront/create" target="_blank" rel="noreferrer">
+          <a
+            href="https://docs.metaplex.com/storefront/create"
+            target="_blank"
+            rel="noreferrer"
+          >
             Read our creators’ guide.
           </a>
         </p>
@@ -553,8 +560,11 @@ const UploadStep = (props: {
                   : mainFile && mainFile.name,
             });
             const url = await fetch(customURL).then(res => res.blob());
-            const files = [coverFile, mainFile, customURL ? new File([url], customURL) : '']
-              .filter(f => f) as File[];
+            const files = [
+              coverFile,
+              mainFile,
+              customURL ? new File([url], customURL) : '',
+            ].filter(f => f) as File[];
 
             props.setFiles(files);
             props.confirm();
@@ -623,10 +633,7 @@ const InfoStep = (props: {
   setAttributes: (attr: IMetadataExtension) => void;
   confirm: () => void;
 }) => {
-  const { image } = useArtworkFiles(
-    props.files,
-    props.attributes,
-  );
+  const { image } = useArtworkFiles(props.files, props.attributes);
   const [form] = Form.useForm();
 
   return (
@@ -687,7 +694,21 @@ const InfoStep = (props: {
               }
             />
           </label>
-
+          {/*<label className="action-field">*/}
+          {/*  <span className="field-title">Collection</span>*/}
+          {/*  <Input*/}
+          {/*    className="input"*/}
+          {/*    placeholder="Collection Mint Key"*/}
+          {/*    allowClear*/}
+          {/*    value={props.attributes.collection}*/}
+          {/*    onChange={info =>*/}
+          {/*      props.setAttributes({*/}
+          {/*        ...props.attributes,*/}
+          {/*        collection: info.target.value,*/}
+          {/*      })*/}
+          {/*    }*/}
+          {/*  />*/}
+          {/*</label>*/}
           <label className="action-field">
             <span className="field-title">Description</span>
             <Input.TextArea
@@ -729,10 +750,7 @@ const InfoStep = (props: {
                 <>
                   {fields.map(({ key, name }) => (
                     <Space key={key} align="baseline">
-                      <Form.Item
-                        name={[name, 'trait_type']}
-                        hasFeedback
-                      >
+                      <Form.Item name={[name, 'trait_type']} hasFeedback>
                         <Input placeholder="trait_type (Optional)" />
                       </Form.Item>
                       <Form.Item
@@ -742,10 +760,7 @@ const InfoStep = (props: {
                       >
                         <Input placeholder="value" />
                       </Form.Item>
-                      <Form.Item
-                        name={[name, 'display_type']}
-                        hasFeedback
-                      >
+                      <Form.Item name={[name, 'display_type']} hasFeedback>
                         <Input placeholder="display_type (Optional)" />
                       </Form.Item>
                       <MinusCircleOutlined onClick={() => remove(name)} />
@@ -1069,10 +1084,7 @@ const LaunchStep = (props: {
   connection: Connection;
 }) => {
   const [cost, setCost] = useState(0);
-  const { image } = useArtworkFiles(
-    props.files,
-    props.attributes,
-  );
+  const { image } = useArtworkFiles(props.files, props.attributes);
   const files = props.files;
   const metadata = props.attributes;
   useEffect(() => {
